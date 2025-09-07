@@ -8,9 +8,9 @@ from pyrogram.types import Message
 from motor.motor_asyncio import AsyncIOMotorClient
 import aiohttp
 
------------------------------
+#-----------------------------
 Config from environment
------------------------------
+#-----------------------------
 API_ID = int(os.getenv("API_ID", "0"))
 API_HASH = os.getenv("API_HASH", "")
 BOT_TOKEN = os.getenv("BOT_TOKEN", "")
@@ -22,10 +22,10 @@ DAILY_MODE = os.getenv("DAILY_MODE", "true").lower() == "true"
 DICT_STRICT = os.getenv("DICT_STRICT", "true").lower() == "true"
 HINT_MODE = os.getenv("HINT_MODE", "position") # "position" | "letterpool"
 
------------------------------
+#-----------------------------
 Embedded minimal word lists
 Replace/extend these arrays as needed
------------------------------
+#-----------------------------
 ANSWERS_EMBED = [
 "smile","crane","slice","opera","stone","smear","crown","geese","baste","sooth",
 "beard","grasp","blade","rapid","clean","point","align","earth","light","night"
@@ -36,9 +36,9 @@ GUESSES_EXTRA = [
 ]
 ALL_VALID = set(ANSWERS_EMBED) | set(GUESSES_EXTRA)
 
------------------------------
+#-----------------------------
 Tiles and evaluation
------------------------------
+#-----------------------------
 GREEN, YELLOW, GREY = "🟩", "🟨", "🟥"
 
 def _counts(s: str) -> Dict[str, int]:
@@ -97,9 +97,9 @@ except Exception:
 pass
 return "Definition not available."
 
------------------------------
+#-----------------------------
 Game session
------------------------------
+#-----------------------------
 @dataclass
 class Attempt:
 guess: str
@@ -149,9 +149,9 @@ random.seed(day_seed if day_seed is not None else int(time.time() // 86400))
 return random.choice(answers)
 return random.choice(answers)
 
------------------------------
+#-----------------------------
 MongoDB (Motor) setup
------------------------------
+#-----------------------------
 mongo_client: Optional[AsyncIOMotorClient] = None
 db = None
 users_col = None
@@ -242,9 +242,9 @@ async def get_daily_word(date_str: str) -> Optional[str]:
 d = await daily_col.find_one({"date": date_str}, {"_id":0, "word":1})
 return d["word"] if d else None
 
------------------------------
+#-----------------------------
 Bot init and handlers
------------------------------
+#-----------------------------
 app = Client("wordseek-bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 single_sessions: Dict[int, Session] = {}
