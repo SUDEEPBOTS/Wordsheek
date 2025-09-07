@@ -1,0 +1,8 @@
+setup:
+addons
+[]
+uild:
+anguages
+
+- python run:
+worker: python bot.py This mirrors Procfile’s worker dyno. Using Procfile alone is ge
